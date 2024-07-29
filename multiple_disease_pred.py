@@ -9,10 +9,10 @@ import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
 
-diabetes_model=pickle.load(open('diabetes_model.sav','rb'))
-heart_disease_model=pickle.load(open('heart_disease_model.sav','rb'))
-breast_cancer_model=pickle.load(open('Breast_Cancer_model.sav','rb'))
-parkinsons_model=pickle.load(open('Parkinson_Disease_model.sav','rb'))
+diabetes_model=pickle.load(open('C:/Users/Moulouk/Desktop/Stage_ML/diabetes_model.sav','rb'))
+heart_disease_model=pickle.load(open('C:/Users/Moulouk/Desktop/Stage_ML/heart_disease_model.sav','rb'))
+breast_cancer_model=pickle.load(open('C:/Users/Moulouk/Desktop/Stage_ML/Breast_Cancer_model.sav','rb'))
+parkinsons_model=pickle.load(open('C:/Users/Moulouk/Desktop/Stage_ML/Parkinson_Disease_model.sav','rb'))
 
 #sidebar for navigate
 with st.sidebar:
@@ -22,7 +22,7 @@ with st.sidebar:
 if (selected == 'Diabetes Prediction'):
     st.title('Diabetes Prediction using ML')
     # getting the input data from the user
-    col1, col2, col3 = st.columns(3)
+    col1, col2= st.columns(2)
 
     with col1:
         Pregnancies = st.text_input('Number of Pregnancies')
@@ -30,23 +30,11 @@ if (selected == 'Diabetes Prediction'):
     with col2:
         Glucose = st.text_input('Glucose Level')
 
-    with col3:
-        BloodPressure = st.text_input('Blood Pressure value')
-
     with col1:
-        SkinThickness = st.text_input('Skin Thickness value')
-
-    with col2:
-        Insulin = st.text_input('Insulin Level')
-
-    with col3:
         BMI = st.text_input('BMI value')
 
-    with col1:
-        DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function value')
-
     with col2:
-        Age = st.text_input('Age of the Person')
+        DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function value')
 
 
     # code for Prediction
@@ -56,8 +44,8 @@ if (selected == 'Diabetes Prediction'):
 
     if st.button('Diabetes Test Result'):
 
-        user_input = [Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin,
-                      BMI, DiabetesPedigreeFunction, Age]
+        user_input = [Pregnancies, Glucose, 
+                      BMI, DiabetesPedigreeFunction]
 
         user_input = [float(x) for x in user_input]
 
