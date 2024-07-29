@@ -1,0 +1,1 @@
+streamlit run "C:\Users\Moulouk\Desktop\Stage_ML\multiple_disease_pred.py"
