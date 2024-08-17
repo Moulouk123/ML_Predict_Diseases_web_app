@@ -158,7 +158,7 @@ if (selected == 'Parkinsons Prediction'):
 
         if parkinsons_prediction[0] == 1:
             parkinsons_diagnosis = "The person has Parkinson's disease"
-            st.warning(diab_diagnosis)
+            st.warning(parkinsons_diagnosis)
         else:
             parkinsons_diagnosis = "The person does not have Parkinson's disease"
             st.success(parkinsons_diagnosis)
