@@ -9,10 +9,10 @@ import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
 
-diabetes_model=pickle.load(open('diabetes_model.sav','rb'))
-heart_disease_model=pickle.load(open('heart_disease_model.sav','rb'))
-breast_cancer_model=pickle.load(open('Breast_Cancer_model.sav','rb'))
-parkinsons_model=pickle.load(open('Parkinson_Disease_model.sav','rb'))
+diabetes_model=pickle.load(open('C:/Users/Moulouk/Desktop/Stage_ML/diabetes_model.sav','rb'))
+heart_disease_model=pickle.load(open('C:/Users/Moulouk/Desktop/Stage_ML/heart_disease_model.sav','rb'))
+breast_cancer_model=pickle.load(open('C:/Users/Moulouk/Desktop/Stage_ML/Breast_Cancer_model.sav','rb'))
+parkinsons_model=pickle.load(open('C:/Users/Moulouk/Desktop/Stage_ML/Parkinson_Disease_model.sav','rb'))
 
 #sidebar for navigate
 with st.sidebar:
@@ -22,19 +22,20 @@ with st.sidebar:
 if (selected == 'Diabetes Prediction'):
     st.title('Diabetes Prediction using ML')
     # getting the input data from the user
-    col1, col2= st.columns(2)
-
+    col1, col2,col3= st.columns(3)
     with col1:
+        Age = st.text_input('Age')
+    with col2:
         Pregnancies = st.text_input('Number of Pregnancies')
 
-    with col2:
+    with col3:
         Glucose = st.text_input('Glucose Level')
 
     with col1:
         BMI = st.text_input('BMI value')
 
     with col2:
-        DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function value')
+        Insuline = st.text_input('Insuline')
 
 
     # code for Prediction
@@ -44,19 +45,18 @@ if (selected == 'Diabetes Prediction'):
 
     if st.button('Diabetes Test Result'):
 
-        user_input = [Pregnancies, Glucose, 
-                      BMI, DiabetesPedigreeFunction]
+        user_input = [Pregnancies, Glucose,  BMI,Age,Insuline]
 
         user_input = [float(x) for x in user_input]
 
         diab_prediction = diabetes_model.predict([user_input])
 
-        if diab_prediction[0] == 0:
-            diab_diagnosis = 'The person is not diabetic'
-            st.success(diab_diagnosis)
-        else:
+        if diab_prediction[0] == 1:
             diab_diagnosis = 'The person is diabetic'
             st.warning(diab_diagnosis)
+        else:
+            diab_diagnosis = 'The person is not diabetic'
+            st.success(diab_diagnosis)
             
 
     
@@ -69,31 +69,30 @@ if (selected == 'Heart Disease Prediction'):
     with col1:
         sex = st.text_input('Sex')
     with col2:
-        cp = st.text_input('Chest Pain types')
+        cp = st.text_input('Chest Pain types ("cp")')
 
     with col3:
-        fbs = st.text_input('Fasting Blood Sugar > 120 mg/dl')
+        fbs = st.text_input('Fasting Blood Sugar > 120 mg/dl ("fbs")')
 
     with col1:
-        restecg = st.text_input('Resting Electrocardiographic results')
+        restecg = st.text_input('Resting Electrocardiographic results ("restecg")')
+
+ 
 
     with col2:
-        thalach = st.text_input('Maximum Heart Rate achieved')
+        exang = st.text_input('Exercise Induced Angina ("exang")')
 
     with col3:
-        exang = st.text_input('Exercise Induced Angina')
+        oldpeak = st.text_input('ST depression induced by exercise ("oldpeak")')
 
     with col1:
-        oldpeak = st.text_input('ST depression induced by exercise')
+        slope = st.text_input('Slope of the peak exercise ST segment ("slope")')
 
     with col2:
-        slope = st.text_input('Slope of the peak exercise ST segment')
+        ca = st.text_input('Major vessels colored by flourosopy ("ca")')
 
     with col3:
-        ca = st.text_input('Major vessels colored by flourosopy')
-
-    with col1:
-        thal = st.text_input('thal')
+        thal = st.text_input('thal ("thal")')
 
 
     # code for Prediction
@@ -103,7 +102,7 @@ if (selected == 'Heart Disease Prediction'):
 
     if st.button('Heart Disease Test Result'):
 
-        user_input = [sex, cp,fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]
+        user_input = [sex, cp,fbs, restecg, exang, oldpeak, slope, ca, thal]
 
         user_input = [float(x) for x in user_input]
 
